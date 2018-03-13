@@ -37,7 +37,7 @@ else
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/transition.css">
 
   <style type="text/css">
-
+    
     .hidden.menu {
       display: none;
     }
@@ -247,7 +247,53 @@ else
   <div class="ui vertical stripe quote segment">
     <div class="ui equal width stackable internally celled grid">
       <div class="center aligned column">
-        <div class="column">
+      	<?php
+      		$image_array  = array("/public/images/samoyed.jpg","/public/images/cute.jpg","/public/images/Golden_Retriever.png","/public/images/Hiromi.png");
+      		$count=0;
+      		
+          $fp = fopen("contact.txt", "r");
+          
+          while (!feof($fp)) {
+            // process current line
+              $current_line = fgets($fp);
+          ?>
+            <div class="column">
+            <h3><?php echo $current_line; ?></h3>
+
+          <?php
+
+            $email = fgets($fp);
+            $email_mail_to = "mailto:"+ $email;
+          ?>
+
+          <p>
+            <img src=<?php echo $image_array[$count]?> class="ui avatar image"> <b>Software Engineer</b> <a href=<?php echo $email_mail_to?>><?php echo $email?></a>
+          </p>
+
+          <?php
+            for($x = 0; $x < 3; $x++)
+            {
+              $current_line = fgets($fp);
+              ?>
+              <p><?php echo  $current_line; ?></p>
+              <?php
+            }
+
+            $current_line = fgets($fp);
+            ?>
+
+          </div>
+            <?php
+            $count++;
+          }
+          fclose($fp);
+      ?>
+
+          
+
+
+
+        <!-- <div class="column">
           <h3>Zhemin Su</h3>
           <p>
             <img src="/public/images/samoyed.jpg" class="ui avatar image"> <b>Software Engineer</b> <a href="mailto:zhemin.su@sjsu.edu">zhemin.su@sjsu.edu</a>
@@ -299,7 +345,7 @@ else
               Working on File recover method
             </p>
           
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

@@ -1,0 +1,23 @@
+zhemin Su
+zhemin.su@sjsu.edu
+Integrated Google Drive API to implement the file upload and folder create features
+Implemented Google Account Authentication
+Built Android’s Activity UI
+
+Ziyu Ye
+ziyu.ye@sjsu.edu
+Android UI design and Implementation
+Used in-app advertisement (Google AdMob) to show ads from Google advertisers
+Implemented File Split and Merge in Android File System
+
+Meng-Huan Lee
+meng-huan.lee@sjsu.edu
+Developed File access in Android External and Internal Storage
+Working on the File Encryption methods in android File System
+Scheduling the group meeting
+
+Xiaoqian Ma
+xiaoqian.ma@sjsu.edu
+Integrated Google Firebase Database API to record the user’s information and file’s metadata
+Implemented Google Firebase Authentication to verify the user’s login and sign up information
+Working on File recover method
