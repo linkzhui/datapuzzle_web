@@ -18,6 +18,13 @@ else
 
   <!-- Site Properties -->
   <title>Login Example - Semantic</title>
+  <link rel="apple-touch-icon" sizes="120x120" href="/public/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/public/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/public/images/favicon-16x16.png">
+  <link rel="manifest" href="/public/images/site.webmanifest">
+  <link rel="mask-icon" href="/public/images/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/reset.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/site.css">
 

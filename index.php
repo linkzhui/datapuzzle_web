@@ -12,21 +12,27 @@ else
 <html>
 <head>
   <!-- Standard Meta -->
+
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
   <!-- Site Properties -->
   <title>About - Data Puzzle</title>
+  <link rel="apple-touch-icon" sizes="120x120" href="public/images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="public/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="public/images/favicon-16x16.png">
+  <link rel="manifest" href="public/images/site.webmanifest">
+  <link rel="mask-icon" href="public/images/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/reset.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/site.css">
-
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/container.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/grid.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/header.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/image.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/menu.css">
-
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/divider.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/dropdown.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/segment.css">
