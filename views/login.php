@@ -98,6 +98,37 @@ else
       ;
     })
   ;
+  function verifyAdmin(){
+      <?php  
+        $file = fopen("adminUser.txt", "r");
+        $username = "";
+        $password = "";
+        if(!feof($file))
+        {
+            $username = fgets($file);
+        }
+        if(!feof($file))
+        {
+            $password = fgets($file);
+        }
+        fclose($file);
+      ?>
+      var username_input = <?php json_decode($username); ?>;
+      alert(username_input+"");
+      // var username_input = document.getElementById("username");
+      // var password_input = document.getElementById("password");
+
+      // if(username===username_input && password === password_input)
+      // {
+      //   alert("username and password matched");
+      // }
+      // else if (username!==username_input||password !== password_input)
+      // {
+      //   alert("username does not match the password, please try again");
+      // }
+      // preventDefault();
+
+  }
   </script>
 </head>
 <body>
@@ -109,21 +140,22 @@ else
         Log-in to your account
       </div>
     </h2>
-    <form class="ui large form">
+
+    <form class="ui large form" method="GET" action="/views/verifyuser.php">
       <div class="ui stacked segment">
         <div class="field">
           <div class="ui left icon input">
             <i class="user icon"></i>
-            <input type="text" name="email" placeholder="E-mail address">
+            <input id="username" type="text" name="username" placeholder="user name" required>
           </div>
         </div>
         <div class="field">
           <div class="ui left icon input">
             <i class="lock icon"></i>
-            <input type="password" name="password" placeholder="Password">
+            <input id = "password" type="password" name="password" placeholder="Password" required>
           </div>
         </div>
-        <div class="ui fluid large teal submit button">Login</div>
+        <div> <button type="submit" class="ui fluid large teal button" value="login">Log In</button></div>
       </div>
 
       <div class="ui error message"></div>
@@ -131,7 +163,7 @@ else
     </form>
 
     <div class="ui message">
-      New to us? <a href="#">Sign Up</a>
+      New to us? <a href="/views/register.php">Sign Up</a>
     </div>
   </div>
 </div>
