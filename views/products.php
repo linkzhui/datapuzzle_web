@@ -1,16 +1,3 @@
-<?
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-  $file = '/tmp/sample-app.log';
-  $message = file_get_contents('php://input');
-  file_put_contents($file, date('Y-m-d H:i:s') . " Received message: " . $message . "\n", FILE_APPEND);
-}
-else
-{
-?>
-
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +32,7 @@ else
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/icon.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/sidebar.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/transition.css">
-
+  <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/list.css">
   <style type="text/css">
 
     .hidden.menu {
@@ -217,7 +204,7 @@ else
       <a class="item contact_us_page">Contact Us</a>
         <div class="right item">
           <a class="ui inverted blue button login_page">Log in</a>
-          <a class="ui inverted blue button signup_page">Sign Up</a>
+          <!-- <a class="ui inverted blue button signup_page">Sign Up</a> -->
         </div>
       </div>
     </div>
@@ -230,6 +217,27 @@ else
       <div class="ui huge primary button">Download</div>
     </div>
 
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui text container">
+    	<h1 class="ui header middle">Features of Data Puzzle</h1>
+
+    	<div class="ui ordered list">
+  <a class="item" href="/views/SignupLogin.php"><b>User Signup/Login</b></a>
+  <a class="item" href="/views/FileSplitMerge.php"><b>File Split/Merge</b></a>
+  <a class="item" href="/views/FileEncryptDecrypt.php"><b>File Encrypt/Decrypt</b></a>
+  <a class="item" href="/views/FileWifi.php"><b>File Trasnfer via Wifi Direct</b></a>
+  <a class="item" href="/views/FileUploadDownload.php"><b>File Upload/Download via Google Drive</b></a>
+</div>
+<br/>
+<br/>
+    </div>
+    <div class="row">
+    <div align="center">
+    <a class="ui huge button" href="/views/statistics.php">Show Visited Features</a>
+  </div>
+</div>
   </div>
 
   <div class="ui vertical stripe segment">
@@ -250,39 +258,6 @@ else
       </div>
     </div>
   </div>
-
-<!-- 
-  <div class="ui vertical stripe quote segment">
-    <div class="ui equal width stackable internally celled grid">
-      <div class="center aligned row">
-        <div class="column">
-          <h3>"What a Company"</h3>
-          <p>That is what they all say about us</p>
-        </div>
-        <div class="column">
-          <h3>"I shouldn't have gone with their competitor."</h3>
-          <p>
-            <img src="assets/images/avatar/nan.jpg" class="ui avatar image"> <b>Nan</b> Chief Fun Officer Acme Toys
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="ui vertical stripe segment">
-    <div class="ui text container">
-      <h3 class="ui header">Breaking The Grid, Grabs Your Attention</h3>
-      <p>Instead of focusing on content creation and hard work, we have learned how to master the art of doing nothing by providing massive amounts of whitespace and generic content that can seem massive, monolithic and worth your attention.</p>
-      <a class="ui large button">Read More</a>
-      <h4 class="ui horizontal header divider">
-        <a href="#">Case Studies</a>
-      </h4>
-      <h3 class="ui header">Did We Tell You About Our Bananas?</h3>
-      <p>Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but its really true. It took years of gene splicing and combinatory DNA research, but our bananas can really dance.</p>
-      <a class="ui large button">I'm Still Quite Interested</a>
-    </div>
-  </div> -->
-
 
   <div class="ui inverted vertical footer segment">
     <div class="ui container">
@@ -317,6 +292,3 @@ else
 </body>
 
 </html>
-<? 
-} 
-?>

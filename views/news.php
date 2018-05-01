@@ -212,7 +212,7 @@ else
       <a class="item contact_us_page">Contact Us</a>
         <div class="right item">
           <a class="ui inverted blue button login_page">Log in</a>
-          <a class="ui inverted blue button signup_page">Sign Up</a>
+          <!-- <a class="ui inverted blue button signup_page">Sign Up</a> -->
         </div>
       </div>
     </div>
@@ -268,6 +268,7 @@ else
 
   <div class="ui vertical stripe segment">
     <div class="ui text container">
+      <h4 class="ui horizontal header divider"></h4>
       <h3 class="ui header">v1.2.1</h3>
       <p>Working on WIFI peer-to-peer file transfer</p>
     

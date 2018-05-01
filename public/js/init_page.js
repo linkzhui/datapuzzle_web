@@ -7,5 +7,6 @@ function init()
     $(".products_page").attr('href',"/views/products.php");
     $(".news_page").attr("href","/views/news.php");
     $(".login_page").attr("href","/views/login.php");
+    $(".signup_page").attr("href","/views/register.php");
     $(".contact_us_page").attr("href","/views/contact_us.php");
 }

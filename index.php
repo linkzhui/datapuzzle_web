@@ -162,6 +162,11 @@ else
 
     })
   ;
+
+  function click()
+  {
+    alert("click");
+  }
   </script>
 </head>
 <body>
@@ -176,10 +181,10 @@ else
     <a class="item contact_us_page">Contact Us</a>
     <div class="right menu">
       <div class="item">
-        <a class="ui button">Log in</a>
+        <a class="ui button login_page">Log in</a>
       </div>
       <div class="item">
-        <a class="ui primary button">Sign Up</a>
+        <a class="ui primary button signup_page">Sign Up</a>
       </div>
     </div>
   </div>
@@ -213,7 +218,7 @@ else
       <a class="item contact_us_page">Contact Us</a>
         <div class="right item">
           <a class="ui inverted blue button login_page">Log in</a>
-          <a class="ui inverted blue button signup_page">Sign Up</a>
+          <!-- <a class="signup_page ui inverted blue button">Sign Up</a> -->
         </div>
       </div>
     </div>
