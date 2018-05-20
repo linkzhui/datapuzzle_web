@@ -1,4 +1,5 @@
 <?
+session_start();
 if ($_SERVER['REQUEST_METHOD'] === 'POST')
 {
   $file = '/tmp/sample-app.log';
@@ -213,7 +214,7 @@ else
       <a class="item news_page">News</a>
       <a class="active item contact_us_page">Contact Us</a>
         <div class="right item">
-          <a class="ui inverted blue button login_page">Log in</a>
+          <a class="ui inverted blue">Hello <?php echo "$_SESSION[username]" ?> </a>
           <!-- <a class="ui inverted blue button signup_page">Sign Up</a> -->
         </div>
       </div>

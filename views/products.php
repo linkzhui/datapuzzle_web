@@ -1,3 +1,4 @@
+<?php session_start();?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -203,7 +204,7 @@
       <a class="item news_page">News</a>
       <a class="item contact_us_page">Contact Us</a>
         <div class="right item">
-          <a class="ui inverted blue button login_page">Log in</a>
+          <a class="ui inverted blue">Hello <?php echo "$_SESSION[username]" ?> </a>
           <!-- <a class="ui inverted blue button signup_page">Sign Up</a> -->
         </div>
       </div>
@@ -233,11 +234,13 @@
 <br/>
 <br/>
     </div>
+    <!-- <div class="ui middle aligned stackable grid container">
     <div class="row">
-    <div align="center">
-    <a class="ui huge button" href="/views/statistics.php">Show Visited Features</a>
-  </div>
-</div>
+        <div class="center aligned column">
+          <a class="ui huge button" href="/views/statistics.php">Show most popular features</a>
+        </div>
+      </div>
+    </div> -->
   </div>
 
   <div class="ui vertical stripe segment">

@@ -1,14 +1,40 @@
 <?php
-	$cookie_name = "upload";
-	$cookie_value = time();
-	setcookie($cookie_name, $cookie_value, time()+(86400*30), "/");
-	$cookie_name = "upload_count";
-	if($visited = $_COOKIE[$cookie_name]){
-				$visited++;
-	}	else {
-				$visited = 1;
-	}
-	setcookie($cookie_name, $visited, time()+(86400*30), "/");
+  session_start();
+    extract( $_POST );
+    $product_name = "Upload";
+
+
+    $_SESSION["product_name"] = $product_name;
+    $conn = mysqli_connect('cmpe272finalproject.cpxjzynfvxe6.us-west-1.rds.amazonaws.com','root','sjsucmpe272');
+    $query = "SELECT * FROM ebdb.review WHERE product_name='$product_name'";
+    $result = $conn -> query($query);
+    $star1 = 0;
+    $star2 = 0;
+    $star3 = 0;
+    $star4 = 0;
+    $star5 = 0;
+
+    for($counter = 0; $row = mysqli_fetch_row($result); $counter++){
+            if($row[2] == 1)
+              $star1+=1;
+            else if($row[2] == 2)
+              $star2+=1;
+            else if($row[2] == 3)
+              $star3+=1;
+            else if($row[2] == 4)
+              $star4+=1;
+            else if($row[2] == 5)
+              $star5+=1;
+    }
+
+    $sum_rate = ($star1*1) + ($star2*2) + ($star3*3) + ($star4*4) + ($star5*5);
+    $total_rate = $star1 + $star2 + $star3 + $star4 + $star5;
+     if( $total_rate != 0)
+      $average =  $sum_rate/$total_rate;
+    else
+      $average = 0;
+    $star = intval($average);
+    $average2 = sprintf('%0.1f', $average);
 ?>
 <!DOCTYPE html>
 <html>
@@ -214,8 +240,8 @@
       <a class="active item products_page">Products</a>
       <a class="item news_page">News</a>
       <a class="item contact_us_page">Contact Us</a>
-        <div class="right item">
-          <a class="ui inverted blue button login_page">Log in</a>
+        <div class="right item"><!-- 
+          <a class="ui inverted blue button login_page">Log in</a> -->
           <!-- <a class="ui inverted blue button signup_page">Sign Up</a> -->
         </div>
       </div>
@@ -235,6 +261,66 @@
           <p><b>Data Puzzle can help user to upload the secured file into google drive. There is a secure section in the google drive called app folder, the app folder is invisible for user and other app. We help user to upload the file into app folder, if user want to read this file again, we help user to download the secured file from app foler. Then merge/decrypt the secured file into a readable file for the user.</b></p>
       </div>
     </div>
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="row">
+        <div class="center aligned column">
+          <h3>Previous Review</h3>
+          <?php
+                echo "<table> <thead> <tr>
+                  <th>Name</th>
+                  <th>Star Rate</th>
+                  <th>Review</th>
+                  </tr> </thead>";
+                
+                echo "<tbody>";
+                  
+                  $query = "SELECT * FROM ebdb.review WHERE product_name='$product_name'";
+                  $result = $conn -> query($query);
+
+                  for($counter = 0; $row = mysqli_fetch_row($result); $counter++){
+                    print("<tr>");
+                    print("<th>$row[5]</th>");
+                    print("<th>$row[2]</th>");
+                    print("<th>$row[3]</th>");
+                    print("</tr>");
+                  }
+                  
+                echo "</tbody> </table>";
+                ?>
+        </div>
+      </div>
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="row">
+        <div class="center aligned column">
+          <h3>Submit Your Review</h3>
+        <form class = "ui form" method="post" action="submit_review.php">
+                <div class="field">
+                    <textarea name="message" id="message" placeholder="Enter your review" rows="6"></textarea>
+                </div>
+                <div class="three column field">
+                  <div class="field">
+                    <select class="ui fluid dropdown" name="rating" id="rating">
+                        <option value="" >- Rating -</option>
+                        <option value="1">★</option>
+                        <option value="2">★★</option>
+                        <option value="3">★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="5">★★★★★</option>
+                      </select>
+                    </div>
+                </div>
+                <br/>
+                <div><button class="ui large blue submit button" type="submit" name="login" value="Login">Add Review</button></div>
+                <br>
+                <br>
+          
+        </form>
+        </div>
+      </div>
   </div>
 
   <div class="ui inverted vertical footer segment">

@@ -22,7 +22,7 @@
 
 	$result = $pdo->query($sql); 
     $rows = array();
-	foreach ($pdo->query($sql) as $row) {
+	foreach ($result as $row) {
         $rows[] = $row;
     }
     echo json_encode($rows);

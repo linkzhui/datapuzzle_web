@@ -1,12 +1,13 @@
-<?
-if ($_SERVER['REQUEST_METHOD'] === 'POST')
-{
-  $file = '/tmp/sample-app.log';
-  $message = file_get_contents('php://input');
-  file_put_contents($file, date('Y-m-d H:i:s') . " Received message: " . $message . "\n", FILE_APPEND);
-}
-else
-{
+<?php
+  session_start();
+  extract( $_GET );
+ 
+ if(isset($username)){
+  $_SESSION["username"] = $username;
+ }
+ else{
+  $_SESSION["username"] = "Guest";
+ }
 ?>
 <!doctype html>
 <html>
@@ -127,6 +128,26 @@ else
         margin-top: 0.5em;
         font-size: 1.5em;
       }
+
+            /* Individual bars */
+.bar-5 {width: <?php if($total_rate == 0) $bar5 = 0; else{ $bar5 = (($star5/$total_rate)*100); $bar5 = intval($bar5); } echo "$bar5%"; ?>; height: 18px; background-color: #4CAF50;}
+.bar-4 {width: <?php if($total_rate == 0) $bar4 = 0; else{ $bar4 = (($star4/$total_rate)*100); $bar4 = intval($bar4); } echo "$bar4%"; ?>; height: 18px; background-color: #2196F3;}
+.bar-3 {width: <?php if($total_rate == 0) $bar3 = 0; else{ $bar3 = (($star3/$total_rate)*100); $bar3 = intval($bar3); } echo "$bar3%"; ?>; height: 18px; background-color: #00bcd4;}
+.bar-2 {width: <?php if($total_rate == 0) $bar2 = 0; else{ $bar2 = (($star2/$total_rate)*100); $bar2 = intval($bar2); } echo "$bar2%"; ?>; height: 18px; background-color: #ff9800;}
+.bar-1 {width: <?php if($total_rate == 0) $bar1 = 0; else{ $bar1 = (($star1/$total_rate)*100); $bar1 = intval($bar1); } echo "$bar1%"; ?>; height: 18px; background-color: #f44336;}
+
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
     }
 
 
@@ -197,8 +218,6 @@ else
    <a class="item products_page">Products</a>
    <a class="item news_page">News</a>
    <a class="item contact_us_page">Contact Us</a>
-  <a class="item login_page">Login</a>
-  <a class="item signup_page">Signup</a>
 </div>
 
 
@@ -217,7 +236,7 @@ else
       <a class="item news_page">News</a>
       <a class="item contact_us_page">Contact Us</a>
         <div class="right item">
-          <a class="ui inverted blue button login_page">Log in</a>
+          <a class="ui inverted blue">Hello <?php echo "$_SESSION[username]" ?> </a>
           <!-- <a class="signup_page ui inverted blue button">Sign Up</a> -->
         </div>
       </div>
@@ -307,6 +326,3 @@ else
 </body>
 
 </html>
-<? 
-} 
-?>

@@ -229,37 +229,59 @@
                 </thead>
                 <tbody>
                     <?php
-                        $cookies = array();
+    // ====== review statics ======
+    $conn = mysqli_connect('cmpe272finalproject.cpxjzynfvxe6.us-west-1.rds.amazonaws.com','root','sjsucmpe272');
+    $query = "SELECT * FROM ebdb.review WHERE product_name=’$product_name’";
+    $result = $conn -> query($query);
+    $star1 = 0;
+    $star2 = 0;
+    $star3 = 0;
+    $star4 = 0;
+    $star5 = 0;
 
-                        
-                        if(isset($_COOKIE['signup'])){
-                          $cookies['Signup/Login Feature'] = $_COOKIE['signup'];
-                        }
-                        if(isset($_COOKIE['split'])){
-                          $cookies['File Split/Merge Feature'] = $_COOKIE['split'];
-                        }
-                        if(isset($_COOKIE['encrypt'])){
-                          $cookies['File Encrypt/Decrypte Feature'] = $_COOKIE['encrypt'];
-                        }
-                        if(isset($_COOKIE['wifi'])){
-                          $cookies['File Wifi Direct Feature'] = $_COOKIE['wifi'];
-                        }
-                        if(isset($_COOKIE['upload'])){
-                          $cookies['File Upload/Download Feature'] = $_COOKIE['upload'];
-                        }
-  
-                        arsort($cookies);
-                        $times = 1;
-                        foreach ($cookies as $key => $value) {
-                            echo "<tr><td>$key</td></tr>";
-                            if($times >= 5){
-                              break;
-                            } else {
-                              $times++;
-                            }
-                        }
-                    ?>
-                </tbody>
+    for($counter = 0; $row = mysqli_fetch_row($result); $counter++){
+            if($row['rate'] == 1)
+              $star1+=1;
+            else if($row['rate'] == 2)
+              $star2+=1;
+            else if($row['rate'] == 3)
+              $star3+=1;
+            else if($row['rate'] == 4)
+              $star4+=1;
+            else if($row['rate'] == 5)
+              $star5+=1;
+    }
+
+    $sum_rate = ($star1*1) + ($star2*2) + ($star3*3) + ($star4*4) + ($star5*5);
+    $total_rate = $star1 + $star2 + $star3 + $star4 + $star5;
+     if( $total_rate != 0)
+     {
+      $average =  $sum_rate/$total_rate;
+    }
+    else
+    {
+      $average = 0;
+      $star = intval($average);
+      $average2 = sprintf('%0.1f', $average);
+    }
+
+     echo "<table>  <tr>
+        <th>Name</th>
+        <th>Star Rate</th>
+        <th>Review</th>
+      </tr>";
+      $query = "SELECT * FROM ebdb.review WHERE product_name=’$product_name’";
+      $result = $conn -> query($query);
+
+      for($counter = 0; $row = mysqli_fetch_array($result); $counter++){
+          echo "<tr><th>". $row['user'] . "</th>";
+          echo "<th>". $row['rate'] . "</th>";
+          echo "<th>". $row['review'] . "</th></tr>";
+      }
+
+    ?>
+
+            </tbody>
 </table>
       </div>
     </div>

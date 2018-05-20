@@ -1,14 +1,40 @@
 <?php
-	$cookie_name = "signup";
-	$cookie_value = time();
-	setcookie($cookie_name, $cookie_value, time()+(86400*30), "/");
-	$cookie_name = "signup_count";
-	if($visited = $_COOKIE[$cookie_name]){
-				$visited++;
-	}	else {
-				$visited = 1;
-	}
-	setcookie($cookie_name, $visited, time()+(86400*30), "/");
+	session_start();
+  	extract( $_POST );
+  	$product_name = "signup";
+
+
+  	$_SESSION["product_name"] = $product_name;
+    $conn = mysqli_connect('cmpe272finalproject.cpxjzynfvxe6.us-west-1.rds.amazonaws.com','root','sjsucmpe272');
+    $query = "SELECT * FROM ebdb.review WHERE product_name='$product_name'";
+    $result = $conn -> query($query);
+    $star1 = 0;
+    $star2 = 0;
+    $star3 = 0;
+    $star4 = 0;
+    $star5 = 0;
+
+    for($counter = 0;	$row = mysqli_fetch_row($result);	$counter++){
+            if($row[2] == 1)
+              $star1+=1;
+            else if($row[2] == 2)
+              $star2+=1;
+            else if($row[2] == 3)
+              $star3+=1;
+            else if($row[2] == 4)
+              $star4+=1;
+            else if($row[2] == 5)
+              $star5+=1;
+    }
+
+    $sum_rate = ($star1*1) + ($star2*2) + ($star3*3) + ($star4*4) + ($star5*5);
+    $total_rate = $star1 + $star2 + $star3 + $star4 + $star5;
+     if( $total_rate != 0)
+      $average =  $sum_rate/$total_rate;
+    else
+      $average = 0;
+    $star = intval($average);
+    $average2 = sprintf('%0.1f', $average);
 ?>
 <!DOCTYPE html>
 <html>
@@ -45,6 +71,7 @@
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/sidebar.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/transition.css">
   <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/list.css">
+  <link rel="stylesheet" type="text/css" href="/public/Semantic-UI-CSS/components/form.css">
   <style type="text/css">
 
     .hidden.menu {
@@ -130,6 +157,27 @@
         margin-top: 0.5em;
         font-size: 1.5em;
       }
+
+      /* Individual bars */
+.bar-5 {width: <?php if($total_rate == 0) $bar5 = 0; else{ $bar5 = (($star5/$total_rate)*100); $bar5 = intval($bar5); } echo "$bar5%"; ?>; height: 18px; background-color: #4CAF50;}
+.bar-4 {width: <?php if($total_rate == 0) $bar4 = 0; else{ $bar4 = (($star4/$total_rate)*100); $bar4 = intval($bar4); } echo "$bar4%"; ?>; height: 18px; background-color: #2196F3;}
+.bar-3 {width: <?php if($total_rate == 0) $bar3 = 0; else{ $bar3 = (($star3/$total_rate)*100); $bar3 = intval($bar3); } echo "$bar3%"; ?>; height: 18px; background-color: #00bcd4;}
+.bar-2 {width: <?php if($total_rate == 0) $bar2 = 0; else{ $bar2 = (($star2/$total_rate)*100); $bar2 = intval($bar2); } echo "$bar2%"; ?>; height: 18px; background-color: #ff9800;}
+.bar-1 {width: <?php if($total_rate == 0) $bar1 = 0; else{ $bar1 = (($star1/$total_rate)*100); $bar1 = intval($bar1); } echo "$bar1%"; ?>; height: 18px; background-color: #f44336;}
+
+
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
     }
 
 
@@ -215,7 +263,7 @@
       <a class="item news_page">News</a>
       <a class="item contact_us_page">Contact Us</a>
         <div class="right item">
-          <a class="ui inverted blue button login_page">Log in</a>
+          <!-- <a class="ui inverted blue button login_page">Log in</a> -->
           <!-- <a class="ui inverted blue button signup_page">Sign Up</a> -->
         </div>
       </div>
@@ -236,7 +284,68 @@
       </div>
     </div>
   </div>
+  <br/>
+  <br/>
 
+  <div class="ui vertical stripe segment">
+  	<div class="row">
+        <div class="center aligned column">
+          <h3>Previous Review</h3>
+        	<?php
+								echo "<table> <thead> <tr>
+									<th>Name</th>
+									<th>Star Rate</th>
+									<th>Review</th>
+								  </tr> </thead>";
+								
+								echo "<tbody>";
+								  
+								  $query = "SELECT * FROM ebdb.review WHERE product_name='$product_name'";
+								  $result = $conn -> query($query);
+
+								  for($counter = 0;	$row = mysqli_fetch_row($result);	$counter++){
+									  print("<tr>");
+									  print("<th>$row[5]</th>");
+									  print("<th>$row[2]</th>");
+									  print("<th>$row[3]</th>");
+									  print("</tr>");
+								  }
+								  
+								echo "</tbody> </table>";
+							  ?>
+        </div>
+      </div>
+  </div>
+
+  <div class="ui vertical stripe segment">
+  	<div class="row">
+        <div class="center aligned column">
+          <h3>Submit Your Review</h3>
+        <form class = "ui form" method="post" action="submit_review.php">
+                <div class="field">
+                    <textarea name="message" id="message" placeholder="Enter your review" rows="6"></textarea>
+                </div>
+                <div class="three column field">
+                	<div class="field">
+                		<select class="ui fluid dropdown" name="rating" id="rating">
+                        <option value="" >- Rating -</option>
+                        <option value="1">★</option>
+                        <option value="2">★★</option>
+                        <option value="3">★★★</option>
+                        <option value="4">★★★★</option>
+                        <option value="5">★★★★★</option>
+                    </select>
+                  	</div>
+                </div>
+                <br/>
+                <div><button class="ui large blue submit button" type="submit" name="login" value="Login">Add Review</button></div>
+                <br>
+                <br>
+          
+        </form>
+        </div>
+      </div>
+  </div>
   <div class="ui inverted vertical footer segment">
     <div class="ui container">
       <div class="ui stackable inverted divided equal height stackable grid">
